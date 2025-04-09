@@ -25,13 +25,14 @@ export class DataBaseService{
         return await this.Databases.createDocument(
             conf.appwriteDatabaseId,
             conf.appwriteCollectionId,
-            slug,
+            ID.unique(),
             {
                 title,
                 content,
                 featuredImage: featuredImage || null, // Ensure featuredImage is passed
                 status,
-                UserId
+                UserId,
+                slug
             }
         );
        
