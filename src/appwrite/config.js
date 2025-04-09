@@ -2,8 +2,6 @@ import conf from '../conf/conf'
 
 import { Client,  ID , Databases , Storage , Query } from "appwrite";
 
-
-
 export class DataBaseService{
     Client = new Client();
     Databases;
@@ -29,7 +27,7 @@ export class DataBaseService{
             {
                 title,
                 content,
-                featuredImage: featuredImage || null, // Ensure featuredImage is passed
+                featuredImage: featuredImage || null, 
                 status,
                 UserId
             }
@@ -78,7 +76,7 @@ export class DataBaseService{
   
 
 
-    // to fetch the current the user single post 
+ 
    async GetPost(slug) {
     try {
         
@@ -93,24 +91,21 @@ export class DataBaseService{
     }
    }
    
-   // tp fetch the current the user all posts
     async getPosts(queries = [Query.equal("status", "active")]) {
         try {
-            // console.log("📡 Fetching posts with queries:", queries);
-            const response = await this.Databases.listDocuments(
+                const response = await this.Databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 queries
             );
-            // console.log("✅ Posts Fetched Successfully:", response);
-            return response;
+              return response;
         } catch (error) {
             console.error("❌ Error fetching posts:", error);
             return null;
         }
     }
 
-    // uploading File Code 
+ 
   
     // uploading the file
     async UploadFile(file) {
