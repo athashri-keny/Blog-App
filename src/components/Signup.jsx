@@ -10,7 +10,7 @@ function Signup() {
     const navigate = useNavigate()
     const [error, setError] = useState("")
     const dispatch = useDispatch()
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit , formState: {errors}} = useForm()
 
     const create = async(data) => {
         setError("")
@@ -55,28 +55,38 @@ function Signup() {
                         label="Full Name: "
                         placeholder="Enter your full name"
                         {...register("name", {
-                            required: true,
+                            required: "Full name is required!",
                         })}
                         />
+                        {errors.message && (
+                            <p style={{color : "red"}}> {errors.name.message}</p>
+                        )}
                         <Input
                         label="Email: "
                         placeholder="Enter your email"
                         type="email"
                         {...register("email", {
-                            required: true,
+                            required: "email is required!",
                             validate: {
                                 matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                                 "Email address must be a valid address",
                             }
                         })}
                         />
+                        {errors.message && (
+                            <p style={{color: "red"}}>{errors.email.message}</p>
+                        )}
                         <Input
                         label="Password: "
                         type="password"
                         placeholder="Enter your password"
                         {...register("password", {
-                            required: true,})}
+                            required: "password is required!",
+                        })}
                         />
+                        {errors.message && (
+                            <p style={{color: "red"}}> {errors.password.message}</p>
+                        )}
                         <Button type="submit" className="w-full">
                             Create Account
                         </Button>
